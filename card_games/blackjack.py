@@ -27,8 +27,8 @@ random.shuffle(deck)
 
 #deal cards
 
-hand_1 = []
-hand_2 = []
+my_hand = []
+dealer_hand = []
 
 def deal_card(hand):
     random_card = random.choice(deck)
@@ -56,13 +56,35 @@ def player_turn(player):
         print('stand')
         pass
 
-deal_card(hand_1)
-deal_card(hand_2)
-deal_card(hand_1)
-deal_card(hand_2)
 
-print(f'hand 1: {hand_1} value: {hand_value(hand_1)}')
-print(f'hand 2: {hand_2}value: {hand_value(hand_2)}')
 
-player_turn(hand_1)
-player_turn(hand_2)
+
+
+
+
+my_money = 1000
+pot = 0
+bet = 0
+win = False
+
+bet = int(input('bet:'))
+my_money -= bet
+pot += bet
+print(f'my money: {my_money}. pot: {pot}.')
+deal_card(my_hand)
+deal_card(dealer_hand)
+deal_card(my_hand)
+if hand_value(my_hand) == 21:
+    my_money += (pot*2)
+    pot = 0
+    bet = 0
+else:
+
+
+    print(f'hand 1: {my_hand} value: {hand_value(my_hand)}')
+    print(f'hand 2: {dealer_hand}value: {hand_value(dealer_hand)}')
+
+    player_turn(my_hand)
+    print(f'hand 1: {my_hand} value: {hand_value(my_hand)}')
+    print(f'hand 2: {dealer_hand}value: {hand_value(dealer_hand)}')
+
