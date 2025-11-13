@@ -50,8 +50,6 @@ def player_turn(player):
     hit_or_stand = input('hit or stand?')
     if hit_or_stand == 'hit':
         deal_card(player)
-        if hand_value(player)>21:
-            print('bust')
     else:
         print('stand')
         pass
@@ -74,17 +72,54 @@ print(f'my money: {my_money}. pot: {pot}.')
 deal_card(my_hand)
 deal_card(dealer_hand)
 deal_card(my_hand)
+
+print(f'your hand: {my_hand} value: {hand_value(my_hand)}')
+print(f'dealer hand: {dealer_hand}value: {hand_value(dealer_hand)}')
+
 if hand_value(my_hand) == 21:
     my_money += (pot*2)
     pot = 0
     bet = 0
+    print('blackjack!')
+    print(f'my money: {my_money}.')
 else:
 
+    endloop = False
+    while endloop == False:
+        
 
-    print(f'hand 1: {my_hand} value: {hand_value(my_hand)}')
-    print(f'hand 2: {dealer_hand}value: {hand_value(dealer_hand)}')
+        if hand_value(my_hand) == 21:
+            my_money += (pot*2)
+            pot = 0
+            bet = 0
+            print('blackjack!')
+            print(f'my money: {my_money}.')
+            endloop=True
+        player_turn(my_hand)
+        if hand_value(my_hand)>21:
+        
+            pot = 0
+            bet = 0
+            print(f'your hand: {my_hand} value: {hand_value(my_hand)}')
+            print('bust')
+            print(f'my money: {my_money}.')
+            endloop=True
+        else:    
+       
 
-    player_turn(my_hand)
-    print(f'hand 1: {my_hand} value: {hand_value(my_hand)}')
-    print(f'hand 2: {dealer_hand}value: {hand_value(dealer_hand)}')
+            while hand_value(dealer_hand)<17 and hand_value(dealer_hand)<hand_value(my_hand):
+                deal_card(dealer_hand)
+                print(f'dealer hand: {dealer_hand}value: {hand_value(dealer_hand)}')
+        
+            if hand_value(dealer_hand)>21:
+                my_money += (pot*2)
+                pot = 0
+                bet = 0
+                print('you win!')
+                print(f'my money: {my_money}.')
+                endloop=True
+            else:
+                print(f'your hand: {my_hand} value: {hand_value(my_hand)}')
+                print(f'dealer hand: {dealer_hand}value: {hand_value(dealer_hand)}')
+
 
