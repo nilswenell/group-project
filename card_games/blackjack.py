@@ -56,7 +56,6 @@ def player_turn(player):
         print('stand')
         pass
 
-
 deal_card(hand_1)
 deal_card(hand_2)
 deal_card(hand_1)
