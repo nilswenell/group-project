@@ -9,7 +9,7 @@ class BlackJackGame:
 import random
 
 #making a deck
-suits = ['Hearts','Diamonds','Clubs','Spades']
+suits = ['♠','♥','♦','♣']
 cards = ['Ace','2','3','4','5','6','7','8','9','10','Jack','Queen','King']
 deck = [(card,suit) for suit in suits for card in cards]
 #print(deck)
