@@ -27,9 +27,6 @@ random.shuffle(deck)
 
 #deal cards
 
-my_hand = []
-dealer_hand = []
-
 def deal_card(hand):
     random_card = random.choice(deck)
     hand.append(random_card)
@@ -61,32 +58,32 @@ def player_turn(player):
 
 
 my_money = 1000
-pot = 0
-bet = 0
-win = False
-
-bet = int(input('bet:'))
-my_money -= bet
-pot += bet
-print(f'my money: {my_money}. pot: {pot}.')
-deal_card(my_hand)
-deal_card(dealer_hand)
-deal_card(my_hand)
-
-print(f'your hand: {my_hand} value: {hand_value(my_hand)}')
-print(f'dealer hand: {dealer_hand}value: {hand_value(dealer_hand)}')
-
-if hand_value(my_hand) == 21:
-    my_money += (pot*2)
+endgame = False
+while my_money >0 and endgame ==False:
     pot = 0
     bet = 0
-    print('blackjack!')
-    print(f'my money: {my_money}.')
-else:
+    win = False
 
-    endloop = False
-    while endloop == False:
+    my_hand = []
+    dealer_hand = []
+    
+    bet = input('bet:')
+    if bet == 'quit':
+        endgame = True
+    else:
+        bet = int(bet)
         
+    
+
+        my_money -= bet
+        pot += bet
+        print(f'my money: {my_money}. pot: {pot}.')
+        deal_card(my_hand)
+        deal_card(dealer_hand)
+        deal_card(my_hand)
+
+        print(f'your hand: {my_hand} value: {hand_value(my_hand)}')
+        print(f'dealer hand: {dealer_hand}value: {hand_value(dealer_hand)}')
 
         if hand_value(my_hand) == 21:
             my_money += (pot*2)
@@ -94,32 +91,54 @@ else:
             bet = 0
             print('blackjack!')
             print(f'my money: {my_money}.')
-            endloop=True
-        player_turn(my_hand)
-        if hand_value(my_hand)>21:
+        else:
+
+            endloop = False
+            while endloop == False:
         
-            pot = 0
-            bet = 0
-            print(f'your hand: {my_hand} value: {hand_value(my_hand)}')
-            print('bust')
-            print(f'my money: {my_money}.')
-            endloop=True
-        else:    
+
+                if hand_value(my_hand) == 21:
+                    my_money += (pot*2)
+                    pot = 0
+                    bet = 0
+                    print('blackjack!')
+                    print(f'my money: {my_money}.')
+                    endloop=True
+                player_turn(my_hand)
+                if hand_value(my_hand)>21:
+        
+                    pot = 0
+                    bet = 0
+                    print(f'your hand: {my_hand} value: {hand_value(my_hand)}')
+                    print('bust')
+                    print(f'my money: {my_money}.')
+                    endloop=True
+                else:    
        
 
-            while hand_value(dealer_hand)<17 and hand_value(dealer_hand)<hand_value(my_hand):
-                deal_card(dealer_hand)
-                print(f'dealer hand: {dealer_hand}value: {hand_value(dealer_hand)}')
-        
-            if hand_value(dealer_hand)>21:
-                my_money += (pot*2)
-                pot = 0
-                bet = 0
-                print('you win!')
-                print(f'my money: {my_money}.')
-                endloop=True
-            else:
-                print(f'your hand: {my_hand} value: {hand_value(my_hand)}')
-                print(f'dealer hand: {dealer_hand}value: {hand_value(dealer_hand)}')
+                    while hand_value(dealer_hand)<17 or hand_value(dealer_hand)<hand_value(my_hand):
+                        deal_card(dealer_hand)
+                        print(f'dealer hand: {dealer_hand}value: {hand_value(dealer_hand)}')
+                
+                    if hand_value(dealer_hand)>16 and hand_value(dealer_hand) == hand_value(my_hand):
+                        my_money += pot
+                        pot = 0
+                        bet = 0
+                        print('push')
+                        print(f'my money: {my_money}.')
+                        endloop=True
 
-
+                    elif hand_value(dealer_hand)>21:
+                        my_money += (pot*2)
+                        pot = 0
+                        bet = 0
+                        print('you win!')
+                        print(f'my money: {my_money}.')
+                        endloop=True
+                    else:
+                        print(f'your hand: {my_hand} value: {hand_value(my_hand)}')
+                        print(f'dealer hand: {dealer_hand}value: {hand_value(dealer_hand)}')
+if my_money<1:
+    print('you lost all your money!!!!')                    
+else:
+    print(f'you ended with {my_money} dollars.')
