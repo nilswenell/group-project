@@ -1,4 +1,4 @@
-class BlackJackGame:
+class PokerGame:
     def __init__(self):
         print("Test  5-Card Draw Poker")
 
