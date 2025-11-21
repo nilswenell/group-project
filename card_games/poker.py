@@ -1,10 +1,11 @@
+'''
 class PokerGame:
     def __init__(self):
         print("Test  5-Card Draw Poker")
 
     def printsomething(something):
         print(something + ' testing')
-
+'''
 
 import random
 
@@ -160,4 +161,4 @@ def play_game():
     else:
         print("TIE!")
 
-play_game()
+#play_game()
