@@ -68,6 +68,7 @@ def player_turn(player):
 
 
 def play_blackjack():
+    print('Welcome to blackjack!')
 
 #initialize variables
     my_money = 1000
@@ -87,7 +88,7 @@ def play_blackjack():
         dealer_hand = Hand('Dealer')
     
     #ask for the first bet
-        bet = input('bet:')
+        bet = input('enter bet or type "quit" :')
 
 
     #always check if the player wants to quit
