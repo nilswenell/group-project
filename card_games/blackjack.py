@@ -88,60 +88,74 @@ def play_blackjack():
         dealer_hand = Hand('Dealer')
     
     #ask for the first bet
-        bet = input('enter bet or type "quit" :')
+        while True:
+            bet = input('enter bet or type "quit" :')
+            if bet == 'quit':
+                endgame = True
+                break
+            try:
+                
+                if int(bet) > my_money:
+                    print('you dont have that much money!')
+                    continue
+                
+                else:
+        #adjust variables for start of turn
+                    bet = int(bet)
+                    my_money -= bet
+                    pot += bet
+                    break
+            except Exception:
+                print('something went wrong. try again.')
+                continue
 
 
     #always check if the player wants to quit
         if bet == 'quit':
-            endgame = True
-        else:
-        #adjust variables for start of turn
-            bet = int(bet)
-            my_money -= bet
-            pot += bet
+            break
         
         #show player their money, the pot
-            print(f'my money: {my_money}. pot: {pot}.')
+        print(f'my money: {my_money}. pot: {pot}.')
         
         #deal player 2 cards, 1 to dealer
-            deal_card(my_hand)
-            deal_card(dealer_hand)
-            deal_card(my_hand)
+        deal_card(my_hand)
+        deal_card(dealer_hand)
+        deal_card(my_hand)
 
         #show the hands and values
-            print(f'your hand: {my_hand.cards} value: {my_hand.get_value()}')
-            print(f'dealer hand: {dealer_hand.cards}value: {dealer_hand.get_value()}')
+        print(f'your hand: {my_hand.cards} value: {my_hand.get_value()}')
+        print(f'dealer hand: {dealer_hand.cards}value: {dealer_hand.get_value()}')
 
 
         #check for automatic blackjack win
-            if my_hand.get_value() == 21:
-                my_money += (pot*2)
-                pot = 0
-                bet = 0
-                print('blackjack!')
-                print(f'my money: {my_money}.')
+        if my_hand.get_value() == 21:
+            my_money += (pot*2)
+            pot = 0
+            bet = 0
+            print('blackjack!')
+            print(f'my money: {my_money}.')
         
-            else:
+        else:
             #begin loop of an individual turn
-                endloop = False
-                while endloop == False:
+            endloop = False
+            while endloop == False:
         
                 #check for blackjack every time
-                    if my_hand.get_value() == 21:
-                        my_money += (pot*2)
-                        pot = 0
-                        bet = 0
-                        print('blackjack!')
-                        print(f'my money: {my_money}.')
-                        endloop=True
+                if my_hand.get_value() == 21:
+                    my_money += (pot*2)
+                    pot = 0
+                    bet = 0
+                    print('blackjack!')
+                    print(f'my money: {my_money}.')
+                    endloop=True
                 
-                    if dealer_hand.get_value()==21:
-                        pot = 0
-                        bet = 0
-                        print('dealer blackjack- you lose!')
-                        print(f'my money: {my_money}.')
-                        endloop = True
-
+                if dealer_hand.get_value()==21:
+                    pot = 0
+                    bet = 0
+                    print('dealer blackjack- you lose!')
+                    print(f'my money: {my_money}.')
+                    endloop = True
+                else:
                 #ask hit or stand
                     player_turn(my_hand)
                 
