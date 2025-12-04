@@ -10,7 +10,7 @@ class RouletteWheel:
     def spin(self):
         return random.choice(self.slots)
 
-# Manage player details and balance
+# Player details and balance
 class Player:
     def __init__(self, name, balance):
         self.name = name
@@ -35,23 +35,14 @@ class RouletteGame:
         self.wheel = RouletteWheel()
 
     def calculate_payout(self, bet_type, bet_amount):
-        payouts = {
-            "straight": 35,
-            "split": 17,
-            "street": 11,
-            "corner": 8,
-            "line": 5,
-            "dozen": 2,
-            "column": 2,
-            "even money": 1  # red/black, odd/even, high/low
-        }
+        payouts = {"straight": 35, "split": 17, "street": 11, "corner": 8, "line": 5, "dozen": 2, "column": 2, "even money": 1}  # red/black, odd/even, high/low
         return bet_amount * payouts.get(bet_type, 0) + bet_amount
 
     def play_roulette(self):
         print("Welcome to American Roulette!")
         print(self.player)
 
-        # Loop: Continue until player quits or runs out of money
+        # Continue until player quits or runs out of money
         while self.player.balance > 0:
             print(f"Current Balance: ${self.player.balance}")
             bets = []
