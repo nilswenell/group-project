@@ -47,7 +47,7 @@ class RouletteGame:
         }
         return bet_amount * payouts.get(bet_type, 0) + bet_amount
 
-    def start(self):
+    def play_roulette(self):
         print("Welcome to American Roulette!")
         print(self.player)
 
@@ -150,5 +150,5 @@ class RouletteGame:
 name = input("Enter your name: ")
 balance = int(input("Enter your starting balance: "))
 player = Player(name, balance)
-game = RouletteGame(player)
-game.start()
+roulette_game = RouletteGame(player)
+roulette_game.play_roulette()
