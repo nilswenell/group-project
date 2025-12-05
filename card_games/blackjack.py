@@ -73,7 +73,7 @@ def play_blackjack():
 #initialize variables
     my_money = 1000
     endgame = False
-
+    print(f'my money: {my_money}')
 #start loop for whole game
     while my_money >0 and endgame ==False:
     

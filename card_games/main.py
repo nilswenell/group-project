@@ -11,7 +11,7 @@ PokerGame.printsomething('something')
 '''
 import blackjack
 import poker
-#import roulette
+import roulette
 
 play = True
 while play == True:
@@ -20,5 +20,10 @@ while play == True:
         blackjack.play_blackjack()
     if ask =='2':    
         poker.play_game()
- #   if ask == '3':
- #       roulette.play_roulette()
+    if ask == '3':
+        name = input("Enter your name: ")
+        balance = int(input("Enter your starting balance: "))
+        player = roulette.Player(name, balance)
+        roulette_game = roulette.RouletteGame(player)
+        roulette_game.play_roulette()   
+
