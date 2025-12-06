@@ -1,12 +1,3 @@
-'''
-class PokerGame:
-    def __init__(self):
-        print("Test  5-Card Draw Poker")
-
-    def printsomething(something):
-        print(something + ' testing')
-'''
-
 import random
 
 #cards and deck

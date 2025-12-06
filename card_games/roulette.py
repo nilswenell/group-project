@@ -196,15 +196,6 @@ class RouletteGame:
         print("Game over!")
         print(self.player)
 
-# Start the game
-'''
-name = input("Enter your name: ")
-balance = int(input("Enter your starting balance: "))
-player = Player(name, balance)
-roulette_game = RouletteGame(player)
-roulette_game.play_roulette()
-'''
-
 if __name__ == "__main__":
     print("This file is not meant to be run directly.")
     print("Run main.py instead.")
