@@ -1,3 +1,10 @@
+"""
+main.py
+
+Main menu for the card_games project.
+Allows the user to choose between Blackjack, Poker, Roulette, or quitting.
+"""
+
 import blackjack
 import poker
 import roulette

@@ -1,3 +1,10 @@
+"""
+roulette.py
+
+Implements an American Roulette game with support for many bet types.
+Also logs the last 10 spins to a CSV file (result,color,column).
+"""
+
 import random
 
 # Holds all slots and provides spin functionality

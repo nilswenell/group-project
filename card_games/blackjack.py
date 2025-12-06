@@ -1,3 +1,10 @@
+"""
+blackjack.py
+
+Implements a simple command-line Blackjack game.
+The player starts with a bankroll, places bets, and plays against the dealer.
+"""
+
 import random
 
 #making a deck

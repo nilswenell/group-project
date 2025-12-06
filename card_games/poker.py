@@ -1,3 +1,9 @@
+"""
+poker.py
+
+Implements a 5-card draw Poker game versus a computer dealer.
+"""
+
 import random
 
 #cards and deck
