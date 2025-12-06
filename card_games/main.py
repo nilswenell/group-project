@@ -16,7 +16,7 @@ import roulette
 
 play = True
 while play == True:
-    ask = input('which game? blackjack? (1), poker? (2) or roulette? (3) \n 1, 2, or 3: ')
+    ask = input('which game? blackjack? (1), poker? (2), roulette? (3), quit? (4) \n 1, 2, 3, or 4: ')
     if ask == '1':
         blackjack.play_blackjack()
     if ask =='2':    
@@ -26,5 +26,7 @@ while play == True:
         balance = int(input("Enter your starting balance: "))
         player = roulette.Player(name, balance)
         roulette_game = roulette.RouletteGame(player)
-        roulette_game.play_roulette()   
-
+        roulette_game.play_roulette()
+    if ask == '4':
+        print('Thanks for playing!')
+        break
