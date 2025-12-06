@@ -33,15 +33,70 @@ class RouletteGame:
     def __init__(self, player):
         self.player = player
         self.wheel = RouletteWheel()
+        # Store the last 10 spins
+        self.last_spins = []
 
     def calculate_payout(self, bet_type, bet_amount):
         payouts = {"straight": 35, "split": 17, "street": 11, "corner": 8, "line": 5, "dozen": 2, "column": 2, "even money": 1}  # red/black, odd/even, high/low
         return bet_amount * payouts.get(bet_type, 0) + bet_amount
+    
+    # Logging functions
+    def result_color(self, result):
+        if result in self.wheel.red_numbers:
+            return "red"
+        if result in self.wheel.black_numbers:
+            return "black"
+        return "green"  # for 0 and 00
 
+    def result_column(self, result):
+        # Columns only apply to 1–36
+        if result.isdigit():
+            num = int(result)
+            if 1 <= num <= 36:
+                return str((num - 1) % 3 + 1)
+        return "0/00"  # not applicable
+
+    def append_spin_record(self, result):
+        # keep result, color, column
+        record = {"result": result, "color": self.result_color(result), "column": self.result_column(result)}
+        # Append and cap to 10
+        self.last_spins.append(record)
+        if len(self.last_spins) > 10:
+            # Remove oldest
+            new_list = []
+            i = 1
+            while i < len(self.last_spins):
+                new_list.append(self.last_spins[i])
+                i = i + 1
+            self.last_spins = new_list
+
+
+    def write_last_spins(self, csv_path="card-games/roulette_session_log.csv"):
+        # Write header and rows
+        with open(csv_path, "w") as f:
+            f.write("result,color,column\n")
+            i = 0
+            while i < len(self.last_spins):
+                s = self.last_spins[i]
+                result = s["result"]
+                color = s["color"]
+                column = s["column"]
+                f.write(result + "," + color + "," + column + "\n")
+                i = i + 1
+
+
+
+    def print_last_spins(self):
+        print("Last 10 Spins:")
+        i = 0
+        while i < len(self.last_spins):
+            s = self.last_spins[i]
+            line = f"Result: {s["result"]} | Color: {s["color"]} | Column: {s["column"]}"
+            print(line)
+            i = i + 1
+    
+    # Main game
     def play_roulette(self):
-        
-
-
         print("Welcome to American Roulette!")
         print(self.player)
 
@@ -132,6 +187,11 @@ class RouletteGame:
                     print(f"Bet on {bet_type} {bet_details} wins! Winnings: ${winnings}")
                 else:
                     print(f"Bet on {bet_type} {bet_details} loses.")
+
+            # Append to last spins, write CSV, and print summary
+            self.append_spin_record(result)
+            self.write_last_spins("card-games/roulette_session_log.csv")
+            self.print_last_spins()
 
             play_again = input("Do you want to play again? (yes/no): ").lower()
             if play_again != "yes":
