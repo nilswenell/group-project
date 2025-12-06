@@ -162,3 +162,7 @@ def play_game():
         print("TIE!")
 
 #play_game()
+
+if __name__ == "__main__":
+    print("This file is not meant to be run directly.")
+    print("Run main.py instead.")

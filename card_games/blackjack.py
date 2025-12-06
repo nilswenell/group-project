@@ -205,3 +205,7 @@ def play_blackjack():
         print(f'you ended with ${my_money}.')
 
 #play_blackjack()
+
+if __name__ == "__main__":
+    print("This file is not meant to be run directly.")
+    print("Run main.py instead.")
